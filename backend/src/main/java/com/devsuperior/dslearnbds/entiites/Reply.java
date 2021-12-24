@@ -2,9 +2,7 @@ package com.devsuperior.dslearnbds.entiites;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -16,18 +14,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_topic")
-public class Topic implements Serializable {
+@Table(name = "tb_reply")
+public class Reply implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String title;
 	
 	@Column(columnDefinition = "TEXT")
 	private String body;
@@ -36,39 +32,26 @@ public class Topic implements Serializable {
 	private Instant moment;
 	
 	@ManyToOne
-	@JoinColumn(name = "lesson_id")
-	private Lesson lesson;
-	
-	@ManyToOne
-	@JoinColumn(name = "offer_id")
-	private Offer offer;
+	@JoinColumn(name = "topic_id")
+	private Topic topic;
 	
 	@ManyToOne
 	@JoinColumn(name = "author_id")
 	private User author;
 	
-	@ManyToOne
-	@JoinColumn(name = "reply_id")
-	private Reply answer;
-	
 	@ManyToMany
-	@JoinTable(name = "tb_topic_likes", joinColumns = @JoinColumn(name = "topic_id"),
+	@JoinTable(name = "tb_reply_likes", joinColumns = @JoinColumn(name = "reply_id"),
 				inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private Set<User> likes = new HashSet<>();
 	
-	@OneToMany(mappedBy = "topic")
-	private List<Reply> replies = new ArrayList<>();
-	
-	public Topic() {
+	public Reply() {
 	}
 
-	public Topic(Long id, String title, String body, Instant moment, Lesson lesson, Offer offer, User author) {
+	public Reply(Long id, String body, Instant moment, Topic topic, User author) {
 		this.id = id;
-		this.title = title;
 		this.body = body;
 		this.moment = moment;
-		this.lesson = lesson;
-		this.offer = offer;
+		this.topic = topic;
 		this.author = author;
 	}
 
@@ -78,14 +61,6 @@ public class Topic implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
 	}
 
 	public String getBody() {
@@ -104,20 +79,12 @@ public class Topic implements Serializable {
 		this.moment = moment;
 	}
 
-	public Lesson getLesson() {
-		return lesson;
+	public Topic getTopic() {
+		return topic;
 	}
 
-	public void setLesson(Lesson lesson) {
-		this.lesson = lesson;
-	}
-
-	public Offer getOffer() {
-		return offer;
-	}
-
-	public void setOffer(Offer offer) {
-		this.offer = offer;
+	public void setTopic(Topic topic) {
+		this.topic = topic;
 	}
 
 	public User getAuthor() {
@@ -132,23 +99,16 @@ public class Topic implements Serializable {
 		return likes;
 	}
 
-	public Reply getAnswer() {
-		return answer;
-	}
-
-	public void setAnswer(Reply answer) {
-		this.answer = answer;
-	}
-
-	public List<Reply> getReplies() {
-		return replies;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((author == null) ? 0 : author.hashCode());
+		result = prime * result + ((body == null) ? 0 : body.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((likes == null) ? 0 : likes.hashCode());
+		result = prime * result + ((moment == null) ? 0 : moment.hashCode());
+		result = prime * result + ((topic == null) ? 0 : topic.hashCode());
 		return result;
 	}
 
@@ -160,11 +120,36 @@ public class Topic implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Topic other = (Topic) obj;
+		Reply other = (Reply) obj;
+		if (author == null) {
+			if (other.author != null)
+				return false;
+		} else if (!author.equals(other.author))
+			return false;
+		if (body == null) {
+			if (other.body != null)
+				return false;
+		} else if (!body.equals(other.body))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
+			return false;
+		if (likes == null) {
+			if (other.likes != null)
+				return false;
+		} else if (!likes.equals(other.likes))
+			return false;
+		if (moment == null) {
+			if (other.moment != null)
+				return false;
+		} else if (!moment.equals(other.moment))
+			return false;
+		if (topic == null) {
+			if (other.topic != null)
+				return false;
+		} else if (!topic.equals(other.topic))
 			return false;
 		return true;
 	}
