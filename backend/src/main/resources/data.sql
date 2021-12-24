@@ -45,3 +45,12 @@ INSERT INTO tb_notification(text, moment, read, round, user_id) VALUES ('Feedbac
 INSERT INTO tb_notification(text, moment, read, round, user_id) VALUES ('Feedback 01', TIMESTAMP WITH TIME ZONE '2020-12-10T15:00:00Z', true, '/offers/1/resource/1/sections/1', 1);
 
 INSERT INTO tb_deliver(uri, moment, status, feedback, correct_Count, user_id, offer_id, lesson_id) VALUES ('https://github.com/cristpsantos/bds-learn.git', TIMESTAMP WITH TIME ZONE '2020-11-30T15:00:00Z', 0, null, null, 1, 1, 4);
+
+INSERT INTO tb_topic(title, body, moment, lesson_id, offer_id, author_id) VALUES ('Tópico 01', 'Fórum tópico 01', TIMESTAMP WITH TIME ZONE '2020-12-05T15:00:00Z', 1, 1, 1);
+INSERT INTO tb_topic(title, body, moment, lesson_id, offer_id, author_id) VALUES ('Tópico 02', 'Fórum tópico 02', TIMESTAMP WITH TIME ZONE '2020-12-06T16:00:00Z', 1, 1, 2);
+INSERT INTO tb_topic(title, body, moment, lesson_id, offer_id, author_id) VALUES ('Tópico 03', 'Fórum tópico 03', TIMESTAMP WITH TIME ZONE '2020-12-07T17:00:00Z', 2, 1, 1);
+INSERT INTO tb_topic(title, body, moment, lesson_id, offer_id, author_id) VALUES ('Tópico 04', 'Fórum tópico 04', TIMESTAMP WITH TIME ZONE '2020-12-08T18:00:00Z', 3, 1, 1);
+INSERT INTO tb_topic(title, body, moment, lesson_id, offer_id, author_id) VALUES ('Tópico 05', 'Entrege de tarefa deu certo?', TIMESTAMP WITH TIME ZONE '2020-12-09T19:00:00Z', 4, 1, 1);
+
+INSERT INTO tb_topic_likes (topic_id, user_id) VALUES (1, 2);
+INSERT INTO tb_topic_likes (topic_id, user_id) VALUES (2, 1);
