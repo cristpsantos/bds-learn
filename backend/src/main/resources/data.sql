@@ -43,3 +43,5 @@ INSERT INTO tb_lessons_done (lesson_id, user_id, offer_id) VALUES (1, 1, 1);
 INSERT INTO tb_notification(text, moment, read, round, user_id) VALUES ('Feedback 01', TIMESTAMP WITH TIME ZONE '2020-12-05T15:00:00Z', true, '/offers/1/resource/1/sections/1', 1);
 INSERT INTO tb_notification(text, moment, read, round, user_id) VALUES ('Feedback 01', TIMESTAMP WITH TIME ZONE '2020-12-07T15:00:00Z', false, '/offers/1/resource/1/sections/1', 1);
 INSERT INTO tb_notification(text, moment, read, round, user_id) VALUES ('Feedback 01', TIMESTAMP WITH TIME ZONE '2020-12-10T15:00:00Z', true, '/offers/1/resource/1/sections/1', 1);
+
+INSERT INTO tb_deliver(uri, moment, status, feedback, correct_Count, user_id, offer_id, lesson_id) VALUES ('https://github.com/cristpsantos/bds-learn.git', TIMESTAMP WITH TIME ZONE '2020-11-30T15:00:00Z', 0, null, null, 1, 1, 4);
